@@ -1,0 +1,102 @@
+/* CONFIGURATION */
+
+html,
+body{
+    height: 100%;
+    margin: 0;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+/* Footer */
+.wrapper{
+    min-height: 100%;
+    margin-bottom: -50px;
+}
+#footer,
+.push{
+    height: 50px;
+}
+
+/* Navbar */
+#btn-nav{
+    width: 0;
+    float: right;
+    margin-right: 25px;
+    cursor: pointer;
+}
+
+/* Login */
+#card-login{
+    width: 450px;
+}
+#btn-enter{
+    border-radius: 15px;
+    font-size: 16px;
+}
+
+.login-border{
+    border-top: .4rem solid rgb(126, 118, 161);
+    border-bottom: .4rem solid rgb(126, 118, 161);
+    border-radius: 10px;
+}
+
+/* Typed JS (Effect) */
+.block-position{
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+/* Message Pulse */
+.pulse{
+    width: 65px;
+    height: 70px;
+    border-radius: 50%;
+    position: fixed;
+    right: 30px;
+    bottom: 75px;
+    padding: 5px;
+    animation: animate 3s linear infinite;
+}
+@keyframes animate {
+    0% {box-shadow: 0 0 0 0 rgb(4, 65, 196), 0 0 0 5px rgb(27, 79, 190);}
+    40% {box-shadow: 0 0 0 10px rgb(126, 121, 56), 0 0 0 15px rgb(47, 89, 180);}
+    80% {box-shadow: 0 0 0 20px rgb(126, 121, 56), 0 0 0 25px rgb(126, 121, 56);}
+    100% {box-shadow: 0 0 0 30 rgb(94, 79, 79), 0 0 0 30px rgb(126, 121, 56);}
+}
+
+/* Custom SweetAlert */
+.swal-text{
+    text-align: center;
+}
+.swal-icon--success:before,
+.swal-icon--success:after,
+.swal-icon--success__hide-corners{
+    background: none !important;
+}
+.swal-icon--success{
+    border-color: rgb(126, 118, 161);;
+}
+.swal-icon--success__line{
+    background-color: rgb(126, 118, 161);;
+}
+.swal-button{
+    padding: 7px 19px;
+    border-radius: 5px;
+    background-color: rgb(34, 34, 25);
+    font-size: 12px;
+    border: 1px solid rgb(34, 34, 25);
+}
+.swal-button:focus{
+    box-shadow: none;
+}
+.swal-button:not([disabled]):hover{
+    background-color: transparent;
+    color: rgb(34, 34, 25);
+    border: 1px solid rgb(34, 34, 25);
+}

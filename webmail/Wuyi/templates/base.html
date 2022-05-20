@@ -1,0 +1,184 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel='stylesheet'href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css'>
+
+    <!--<link rel="shortcut icon" type="image/x-icon" href="/static/wuyi/img/logo.ico">-->
+    <link rel="shortcut icon" type="image/png" href="/static/Wuyi/img/logo.png">
+    <link rel="stylesheet" href="/static/Wuyi/css/style.css">
+
+    <title>{% block title %}Home{% endblock title %} </title>
+</head>
+<body>
+    <div class="wrapper">
+        {% block image %}
+        <style>
+            body{
+                background-image: url("/static/Wuyi/img/home.png");
+                background-position: center 0px;
+                background-attachment: fixed;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        </style>
+        {% endblock image %}
+        <header>
+            <!--Navbar-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="col-sm">
+                    <a class="mavbar-brand flex-grow-1" style="color: #fff; margin-left: 25px; text-decoration: none; font-size: 20px;" href="/">
+                        {% block nav-content %}
+                        <img src="/static/Wuyi/img/logo.png" style="width: 51px;height: 40px;" class="align-middle" alt="logo">&nbsp; <i><b><span>Wuyi</span></b></i>
+                        {% endblock nav-content %}
+                    </a>   
+                </div>
+
+                <!-- Data and Time -->
+                
+                <!--Button-->
+                <div class="col-sm">
+                    <a class="navbar-brand flex-grow-1" id="btn-nav" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                        <i class="fa fa-bars" id="btn-nav"></i>
+                    </a>  
+                </div>
+            </nav>
+        </header>
+        
+        {% block content %}{% endblock content %}
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-center text-lg-start" id="footer" style="color: #fff;">
+        <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">&copy; {% now "Y" %} Copyright:
+            <a class="text-light" href="#" style="text-decoration: none;">
+                <span style="color: #8abaae;">www.wuyiuy1.com</span>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Sidebar (Bootstap offcanvas) -->
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">MENU</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            <div class="d-grid gap-2">
+                {% block sidebar-content %}
+                <a href="{% url 'login' %}" class="btn btn-outline-secondary btn-sm">Login</a>
+                {% endblock sidebar-content %}
+                <hr><br>
+                <center class="mt-5">
+                    <img src="/static/Wuyi/img/logo.png" style="width: 200px;height: 156px;">&nbsp;
+                </center>
+            </div>
+        </div>
+    </div>
+
+    <!-- INCLUDES -->
+<!--
+    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog ">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">
+                        
+                        <i class="fas fa-door-open"></i>&nbsp;&nbsp; Logout
+
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+            
+                <div class="modal-body text-center">
+                
+                    <br>
+                    <span class="text-danger"><i class="fas fa-door-open fa-3x"></i></span>
+                    <div class="text-danger mb-3 mt-4">Are you sure you want to log out ?</div>
+
+                </div>
+                    
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm btn-modal" data-bs-dismiss="modal">Close</button>
+                        
+                    <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm btn-modal">Logout</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/inputmask/4.0.9/jquery.inputmask.bundle.min.js" integrity="sha512-VpQwrlvKqJHKtIvpL8Zv6819FkTJyE1DoVNH0L2RLn8hUPjRjkS/bCYurZs0DX9Ybwu9oHRHdBZR9fESaq8Z8A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="/static/Wuyi/js/script.js"></script>
+
+    <!--Message from backend(login)-->
+    {% if form.errors %}
+        <script>
+            swal("Denied !", "Enter your data correctly.", "success")
+        </script>
+    {% endif %}
+
+
+    <!-- Typed effect control -->
+    {% block typed %}
+    <script>
+        var typed = new Typed('#element', {
+            strings:[
+            'University of Yaounde I webmail\'s mail WUYI',
+            'Send, Receive and enjoy many things Here',
+            'Let\'s go !',
+            ],
+            typeSpeed: 50,
+            backSpeed: 30,
+            loop: true
+        });
+    </script>
+    {% endblock typed %}
+    
+
+    <!-- Function to pulse the text (login page) -->
+    <script>
+        (function pulse(){
+            $(".text-pulse").fadeOut(1000).fadeIn(1000, pulse);
+        })();
+    </script>
+
+    <!-- Function to hide/show password -->
+    <script>
+        function myfunction(){
+            var p = document.getElementById("password");
+            if(p.type === "password"){
+                p.type = "text"
+            }
+            else{
+                p.type = "password"
+            }
+        }
+    </script>
+
+    <!-- Script to close offcanvas when the button is clicked -->
+    <script>
+        jQuery("#offcanvasRight, .offcanvas-body a").click(function(){
+            console.log($(this).attr('href'));
+            jQuery('.offcanvas').offcanvas('hide');
+        })
+    </script>
+
+</body>
+</html>
