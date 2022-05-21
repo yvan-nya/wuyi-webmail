@@ -1,6 +1,8 @@
 from django.contrib import admin
 from django.urls import path, include
 from Wuyi import views
+from webmail import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     # Path to admin page
@@ -11,4 +13,6 @@ urlpatterns = [
     path('inbox/', views.inbox, name = "inbox"),
     # Path to login/logout
     path('login/', include('django.contrib.auth.urls')),
-]
+    # Path to send a message
+    path('send_message/', views.send_message, name = "send_message"),
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

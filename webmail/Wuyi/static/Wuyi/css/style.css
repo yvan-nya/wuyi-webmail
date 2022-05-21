@@ -41,6 +41,14 @@ body{
     border-radius: 10px;
 }
 
+/* Other Parts */
+.btn-modal{
+    width: 70px;
+}
+.btn-action{
+    width: 45px;
+}
+
 /* Typed JS (Effect) */
 .block-position{
     width: 80%;
@@ -99,4 +107,24 @@ body{
     background-color: transparent;
     color: rgb(34, 34, 25);
     border: 1px solid rgb(34, 34, 25);
+}
+
+/* Bootstrap Configuration */
+.form-control:focus{
+    border-color: blueviolet;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.form-check-input:checked{
+    background-color: #8abaae;
+    border: blueviolet !important;
+    box-shadow: 0 0 8px blue !important;
+}
+.form-check-input{
+    border: blueviolet !important;
+    box-shadow: 0 0 8px blue !important;
+}
+.form-switch .form-check-input:focus{
+    background-color: rgb(136, 132, 158);
 }

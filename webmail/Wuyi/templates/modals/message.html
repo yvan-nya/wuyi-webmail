@@ -1,0 +1,52 @@
+{% extends "modals/baseModal.html" %}
+
+{% block modal-id %}id="messageModal"{% endblock modal-id %}
+
+{% block width %}modal-xl{% endblock width %}
+
+{% block modal-tilte %}<i class="fas fa-door-open"></i>&nbsp;&nbsp; Message{% endblock modal-tilte %}
+
+{% block form %}
+    <form method="POST" action="send_message/" autocomplete="off" class="was-validated" enctype="multipart/form-data"> 
+        <input type="hidden" name="csrfmiddlewaretoken" value="nryojDjDA54JcK7tcTU32BSDZUIw1J5DFlJU2G7eZME8CBUMlJONdpbm22DEkSoS">
+        {% csrf_token %}
+        <div class="modal-body">
+            <div class="mb-1">
+                <input type="text" class="form-control" name="name" maxlength="40" placeholder="Name" required>
+            </div>
+            <div class="mb-1">
+                <input type="text" class="form-control phone" name="phone" maxlength="40" placeholder="Phone" required>
+            </div>
+            <div class="mb-1">
+                <input type="email" class="form-control" name="email" maxlength="40" placeholder="Email" required>
+            </div>
+            <div class="mb-1">
+                <input type="text" class="form-control" name="subject" maxlength="100" placeholder="Subject" required>
+            </div>
+            <hr>
+            <div class="form-group mb-2">
+                <textarea name="message" id="message" class="form-control" rows="10" maxlength="1000" required placeholder="Your message..."></textarea>
+            </div>
+            <!-- Character remaining counter -->
+            <span id="remaining"></span>
+            <hr>
+            <div class="form-group mb-3">
+                <input class="form-control" type="file" name="file" id="file">
+            </div>
+            <h6 class="text-danger" style="font-size: 12px;">Note: for more than one file use:
+                <strong class="text-warning">rar </strong>or <strong class="text-warning">zip</strong>.
+            </h6>
+            <hr>
+            <div class="d-grid gap-2 mt-3">
+                <button class="btn text-light" type="submit" style="background-color: rgb(64, 163, 163);">Send message &nbsp;&nbsp;
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+        {% csrf_token %}
+        <!-- Input Hidden (all message arrives as pending) -->
+        <input type="hidden" name="status" value="Pending">
+    </form>    
+{% endblock form %}
+
+{% block close %}{% endblock close %}

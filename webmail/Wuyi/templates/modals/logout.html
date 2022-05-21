@@ -1,0 +1,15 @@
+{% extends "modals/baseModal.html" %}
+
+{% block modal-id %}id="logoutModal"{% endblock modal-id %}
+
+{% block modal-tilte %}<i class="fas fa-door-open"></i>&nbsp;&nbsp; Logout{% endblock modal-tilte %}
+
+{% block modal-body %}
+    <br>
+    <span class="text-danger"><i class="fas fa-door-open fa-3x"></i></span>
+    <div class="text-danger mb-3 mt-4">Are you sure you want to log out ?</div>
+{% endblock modal-body %}
+
+{% block modal-footer %}
+<a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm btn-modal">Logout</a>
+{% endblock modal-footer %}

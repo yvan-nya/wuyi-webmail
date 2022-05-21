@@ -7,21 +7,31 @@
 
 {% block content %}
 <div class="container mt-5" id="card-login">
-    <div class="card p-3 login-border">
+    <div class="card p-3 login-border" style="background-color: rgb(238, 227, 238);">
         <span class="text-center mt-3 text-pulse"><strong>RESTRICTED ACCESS</strong></span>
         <form action="" method="POST" autocomplete="off">
             {% csrf_token %}
             <div class="input-group mb-2 mt-4">
                 <input type="text" class="form-control" name="username" placeholder="Username">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-user"></span>
+                    </div>
+                </div>
             </div>
             <div class="input-group mb-2">
-                <input type="password" class="form-control" name="password" placeholder="Password">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                <div class="input-group-append">
+                    <div class="input-group-text">
+                        <span class="fas fa-lock"></span>
+                    </div>
+                </div>
             </div>
             <div class="form-check form-switch">
-                <input type="checkbox" class="form-check-input" style="float: right;">
+                <input type="checkbox" onclick="myfunction()" class="form-check-input" style="float: right;">
             </div>
             <div class="d-grid gap-2">
-                <input class="btn btn-success btn-sm mt-3" type="submit" value="Enter" id="btn-enter">
+                <input class="btn btn-outline-primary btn-sm mt-3" type="submit" value="Enter" id="btn-enter">
             </div>
         </form>
         <center class="mt-5 mb-5">

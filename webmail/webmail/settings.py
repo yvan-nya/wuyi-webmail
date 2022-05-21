@@ -1,4 +1,5 @@
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,13 +20,15 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Wuyi'
+    'Wuyi',
+    'django_cleanup'
 ]
 
 MIDDLEWARE = [
@@ -40,7 +43,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'webmail.urls'
 
-APPEND_SLASH = True #Ajoute un slash en fin d'URL
+APPEND_SLASH = False 
 
 TEMPLATE_DIRS = [
     "/home/yvan/Projets/Webmail/webmail/templates",
@@ -120,3 +123,21 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # LOGIN/LOGOUT
 LOGIN_REDIRECT_URL = 'inbox'
 LOGOUT_REDIRECT_URL = 'home'
+
+# JAZZMIN Configuration interface
+JAZZMIN_SETTINGS = {
+    "site_title": "wuyiUY1",
+    "site_logo": "/Wuyi/img/logo.png",
+    "site_icon": "/Wuyi/img/logo.png",
+    "welcome_sign": "Wuyi-UY1 ADMIN",
+    "copyright": "Wuyi-UY1",
+    "site_header": "Wuyi-UY1",
+    "site_brand": "Wuyi-UY1"
+}
+JAZZMIN_UI_TWEAKS = {
+    "theme":"darkly"
+}
+
+# MEDIA
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

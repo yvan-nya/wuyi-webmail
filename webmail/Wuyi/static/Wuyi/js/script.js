@@ -12,7 +12,7 @@ $(document).ready(function () {
         }
         else if (start == limit){
             $("#remaining").html("Characters remaining: "+ (limit - start)).css('color', 'red');
-            swal("Opss !", "Character limit exceeded !", "info");
+            swal("Opsss !", "Character limit exceeded !", "info");
         }
         else if (start > 984){
             $("#remaining").html("Characters remaining: "+ (limit - start)).css('color', 'red');
@@ -34,3 +34,27 @@ $(document).ready(function(){
         return false
     }})
 })
+
+// Get the TIME running at realtime
+setInterval(function(){
+    var date = new Date();
+    $('#clock').html(
+        (date.getHours < 10 ? '0' : '') + date.getHours() + ":" +
+        (date.getMinutes < 10 ? '0' : '') + date.getMinutes() + ":" +
+        (date.getSeconds < 10 ? '0' : '') + date.getSeconds()
+    );
+}, 500);
+
+// Update the page always at (0:00)
+function autoRefresh(){
+    var now = new Data(), then = new Data();
+    then.setHours(hours, minutes, seconds, 0);
+    if(then.getTime() < now.getTime()){
+        then.setData(now.getDate() + 1);
+    }
+    var timeout = (then.getHours() - now.getTime());
+    setTimeout(function(){
+        window.location.reload(true);
+    }, timeout);
+}
+autoRefresh(0,0,0)

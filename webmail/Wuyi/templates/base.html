@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel='stylesheet'href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css'>
 
-    <!--<link rel="shortcut icon" type="image/x-icon" href="/static/wuyi/img/logo.ico">-->
     <link rel="shortcut icon" type="image/png" href="/static/Wuyi/img/logo.png">
+    <link rel="stylesheet" href="/static/Wuyi/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/Wuyi/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/Wuyi/css/fontawesome.min.css">
     <link rel="stylesheet" href="/static/Wuyi/css/style.css">
 
     <title>{% block title %}Home{% endblock title %} </title>
@@ -41,7 +43,8 @@
                 </div>
 
                 <!-- Data and Time -->
-                
+                {% block datetime %}{% endblock datetime %}
+
                 <!--Button-->
                 <div class="col-sm">
                     <a class="navbar-brand flex-grow-1" id="btn-nav" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
@@ -65,7 +68,7 @@
 
     <!-- Sidebar (Bootstap offcanvas) -->
 
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel" style="background-color: rgb(238, 227, 238);">
         <div class="offcanvas-header">
             <h5 id="offcanvasRightLabel">MENU</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -83,41 +86,6 @@
         </div>
     </div>
 
-    <!-- INCLUDES -->
-<!--
-    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog ">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">
-                        
-                        <i class="fas fa-door-open"></i>&nbsp;&nbsp; Logout
-
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-
-            
-                <div class="modal-body text-center">
-                
-                    <br>
-                    <span class="text-danger"><i class="fas fa-door-open fa-3x"></i></span>
-                    <div class="text-danger mb-3 mt-4">Are you sure you want to log out ?</div>
-
-                </div>
-                    
-
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-sm btn-modal" data-bs-dismiss="modal">Close</button>
-                        
-                    <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm btn-modal">Logout</a>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
-
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -127,6 +95,10 @@
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="/static/Wuyi/js/script.js"></script>
 
+    <!-- INCLUDES -->
+    {% include "modals/logout.html" %}
+    {% include "modals/message.html" %}
+
     <!--Message from backend(login)-->
     {% if form.errors %}
         <script>
@@ -134,6 +106,15 @@
         </script>
     {% endif %}
 
+    <!-- Message from backend (success messages) -->
+    {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <script>
+                var m = "{{message}}";
+                swal("Perfect !", m, "success")
+            </script>
+        {% endif %}
+    {% endfor %}
 
     <!-- Typed effect control -->
     {% block typed %}
@@ -178,6 +159,17 @@
             console.log($(this).attr('href'));
             jQuery('.offcanvas').offcanvas('hide');
         })
+    </script>
+
+    <!-- Script to accept until 2Mb (upload file) -->
+    <script>
+        var upload = document.getElementById('file');
+        upload.onchange = function(){
+            if (this.files[0].size > 2 * 1048576){
+                swal("Attention !", "Maximum allowed size 2Mb.", "info");
+                this.value = "";
+            };
+        };
     </script>
 
 </body>

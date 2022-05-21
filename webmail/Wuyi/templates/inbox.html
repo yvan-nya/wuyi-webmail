@@ -9,11 +9,76 @@
     <i class="fas fa-envelope" style="color: #8abaae;"></i>&nbsp;&nbsp; <i><b><span>Inbox</span></b></i>
 {% endblock nav-content %}
 
+{% block datetime %}
+    <div class="text-light" id="desk-datatime" style="font-size: 12px; margin-top: 5px;">{% now "l (m/d/Y)" %} &nbsp;
+        <span style="color:#8abaae; font-weight: bold;" id="clock"></span>
+    </div>
+{% endblock datetime %}
+
 {% block sidebar-content %}
-    <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">Logout</a>
-    <a href="{% url 'inbox' %}" class="btn btn-outline-success btn-sm">Admin</a>
+    <center>
+        <!-- Welcome User -->
+        Welcome: <span class="text-success">{{user.get_username}}</span>
+        <br><br>
+    </center>
+    <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
+    <a href="{% url 'admin:index' %}" target="_blank" class="btn btn-outline-success btn-sm">Admin</a>
 {% endblock sidebar-content %}
 
 {% block content %}
-  
+    <div class="container-fluid mt-3" style="width: 90%;"></div>
+        <!-- Dashboard -->
+        <div>
+            {% include "dashboard/dashboard.html" %}
+        </div>
+        <br>
+
+        <!-- Global Search -->
+        <form>
+            {% csrf_token %}
+            <div class="input-group input-group-sm mb-3">
+                <input type="text" name="#" class="form-control" placeholder="Search for..." value="#">
+                <button class="btn btn-secondary" title="Search"><i class="fas fa-search"></i></button>
+                <a href="{% url 'inbox' %}" class="btn btn-dark" style="margin-left: 2px;" title="Refresh"><i class="fas fa-sync-alt"></i></a>
+            </div>
+        </form>
+
+        <!-- Table of messages -->
+        <div class="col-lg-12">
+            <div style="margin-top: 5px;">
+                <table class="table tabl-sm">
+                    <thead class="table-success">
+                        <tr>
+                            <th style="width: 18%;">Name</th>
+                            <th style="width: 13%;">Phone</th>
+                            <th style="width: 18%;">Email</th>
+                            <th style="width: 18%;">Subject</th>
+                            <th style="width: 15%;">Received On</th>
+                            <th style="width: 10%;">Status</th>
+                            <th style="width: 8%; text-align: center;" colspan="2">Actions</th>
+                        </tr>
+                    </thead>
+                    <!-- Data from backend -->
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <button class="btn btn-sm btn-secondary btn-danger" title="Delete Message">
+                                <i class="fa fa-trash-alt"></i>
+                            </button>
+                        </td>
+                        <td>
+                            <a href="#" class="btn btn-sm text-light btn-action btn-success " title="Read Message">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
