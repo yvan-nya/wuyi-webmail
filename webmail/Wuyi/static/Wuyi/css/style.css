@@ -5,7 +5,8 @@ body{
     height: 100%;
     margin: 0;
     max-width: 100%;
-    overflow: hidden;
+    position: relative;
+    /*overflow: hidden;*/
 }
 
 /* Footer */
@@ -48,6 +49,29 @@ body{
 .btn-action{
     width: 45px;
 }
+
+/* If no messages */
+#msg{
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    font-size: 26px;
+}
+#refresh{
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    color: black;
+}
+#refresh:hover{
+    color: rgb(129, 177, 57);
+}
+
 
 /* Typed JS (Effect) */
 .block-position{
@@ -127,4 +151,24 @@ body{
 }
 .form-switch .form-check-input:focus{
     background-color: rgb(136, 132, 158);
+}
+
+/* Pagination */
+.page-item.active .page-link{
+    columns: #fff;
+    background-color: #6c757d;
+    border: 1px solid #6c757d;
+}
+.pagination > li > a{
+    background-color: #fff;
+    color: #6c757d;
+}
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > span > a:focus,
+.pagination > span > a:hover{
+    color: black;
+    background-color: #d3d3d3d3;
+    border: 1px solid #6c757d;
+    box-shadow: none;
 }

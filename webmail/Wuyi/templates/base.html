@@ -42,7 +42,7 @@
                     </a>   
                 </div>
 
-                <!-- Data and Time -->
+                <!-- Data and Time Denied in frontend(content 2) -->
                 {% block datetime %}{% endblock datetime %}
 
                 <!--Button-->
@@ -172,5 +172,16 @@
         };
     </script>
 
+    <!-- If no messages in inbox, hide all content -->
+    <script>
+        $(document).ready(function(){
+            var verify = $('#chk_td').length;
+            if(verify == 0){
+                $(".hide").css('display', 'none');
+                $("#msg").text("No message found");
+                $("#refresh").html('<i class="fas fa-sync-alt fa-3x"></i>')
+            }
+        });
+    </script>
 </body>
 </html>

@@ -26,25 +26,24 @@
 {% endblock sidebar-content %}
 
 {% block content %}
-    <div class="container-fluid mt-3" style="width: 90%;"></div>
+    <div class="container-fluid mt-3 pad" style="width: 90%; "></div>
         <!-- Dashboard -->
-        <div>
+        <div class="hide">
             {% include "dashboard/dashboard.html" %}
         </div>
         <br>
 
         <!-- Global Search -->
-        <form>
-            {% csrf_token %}
+        <form class="hide">
             <div class="input-group input-group-sm mb-3">
-                <input type="text" name="#" class="form-control" placeholder="Search for..." value="#">
+                <input type="text" name="q" class="form-control" placeholder="Search for..." value="{{ request.GET.q }}">
                 <button class="btn btn-secondary" title="Search"><i class="fas fa-search"></i></button>
                 <a href="{% url 'inbox' %}" class="btn btn-dark" style="margin-left: 2px;" title="Refresh"><i class="fas fa-sync-alt"></i></a>
             </div>
         </form>
 
         <!-- Table of messages -->
-        <div class="col-lg-12">
+        <div class="col-lg-12 hide">
             <div style="margin-top: 5px;">
                 <table class="table tabl-sm">
                     <thead class="table-success">
@@ -59,15 +58,20 @@
                         </tr>
                     </thead>
                     <!-- Data from backend -->
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    {% for client in clients %}
+                    <tr id="chk_td">
+                        <td>{{client.name}}</td>
+                        <td>{{client.phone}}</td>
+                        <td>{{client.email}}</td>
+                        <td>{{client.subject}}</td>
+                        <td>{{client.create_at | date:'m/d/y (H:i)'}}</td>
+                        {% if client.status == 'Pending' %}
+                        <td class="text-danger">{{client.status}}</td>
+                        {%else%}
+                        <td>{{client.status}}</td>
+                        {% endif %}
                         <td>
-                            <button class="btn btn-sm btn-secondary btn-danger" title="Delete Message">
+                            <button class="btn btn-sm btn-secondary btn-danger" title="Delete Message" data-bs-toggle="modal" data-bs-target="#deleteModal{{ client.pk }}">
                                 <i class="fa fa-trash-alt"></i>
                             </button>
                         </td>
@@ -77,8 +81,45 @@
                             </a>
                         </td>
                     </tr>
+
+                    <!-- Modal delete configuration -->
+                    {% include "modals/delete.html" %}
+
+                    {% endfor %}
                 </table>
             </div>
         </div>
+        <!-- Pagination -->
+        <nav>
+            {% if clients.has_other_pages %}
+            <ul class="pagination">
+                {% if clients.has_previous %}
+                <a href="?page=1" class="btn btn-outline-secondary mb-4" style="border-radius: 1px; border: 1px solid #d3d3d3d3; border-left:none">First</a>
+                <li class="page-item"><a href="?page={{clients.previous_page_number}}"><i class="fas fa-angle-double-left"></i></a></li>
+                {%else%}
+                <li class="page-item disabled"></li>
+                {% endif %}
+
+                {% for i in clients.paginator.page_range %}
+                    {% if clients.number == i %}
+                    <li class="page-item active"><span class="page-link">{{ i }}<span class="sr-only"></span></span></li>
+                    {%else%}
+                    <li class="page-item"><a href="?page={{ i }}" class="page-link">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if clients.has_next %}
+                <li class="page-item"><a href="?page={{clients.next_page_number}}"><i class="fas fa-angle-double-right"></i></a></li>
+                <a href="?page={{ clients.paginator.num_pages}}" class="btn btn-outline-secondary mb-4" style="border-radius: 1px; border: 1px solid #d3d3d3d3; border-left:none">Last</a>
+                {%else%}
+                <li class="page-item disabled"></li>
+                {% endif %}
+            </ul>
+            {% endif %}
+        </nav>
     </div>
+
+    <!-- If no messages, show this content -->
+    <span class="text-danger" id="msg"></span>
+    <a href="{% url 'inbox' %}" id="refresh"></a>
 {% endblock content %}

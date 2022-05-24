@@ -1,0 +1,19 @@
+{% extends "modals/baseModal.html" %}
+
+{% block modal-id %}id="  "{% endblock modal-id %}
+
+{% block modal-tilte %}<i class="fas fa-trash-alt"></i>&nbsp;&nbsp; Delete Message{% endblock modal-tilte %}
+
+{% block modal-body %}
+   <div class="text-center text-danger">
+        <i class="far fa-times-circle fa-5x mb-4 mt-2"></i>
+   </div>
+   <div class="text-center text-danger">
+       <span>DO YOU WANT TO DELETE THIS MESSAGE ???</span>
+       <div class="text-dark mt-3 mb-2">Client: <strong>{{ client.name }}</strong></div>
+   </div>
+{% endblock modal-body %}
+
+{% block modal-footer %}
+<a href="/delete_message/{{ client.id }}" class="btn btn-outline-danger btn-sm btn-modal">Delete</a>
+{% endblock modal-footer %}
