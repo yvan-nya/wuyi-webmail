@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Client{% endblock title %}          
+
+{% block nav-content %}
+    <i class="fas fa-user-alt"></i>&nbsp;&nbsp; <span style="font-size: 16px;">{{ client.name }}</span>
+{% endblock nav-content %}
+
+{% block sidebar-content %}
+    <center>
+        <!-- Welcome User -->
+        Welcome: <span class="text-success">{{user.get_username}}</span>
+        <br><br>
+    </center>
+    <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#logoutModal">Logout</a>
+    <a href="{% url 'admin:index' %}" target="_blank" class="btn btn-outline-success btn-sm">Admin</a>
+{% endblock sidebar-content %}
+
+{% block content %}
+    <div class="container">
+        <div class="card text-center mt-3">
+            <div class="card-header">
+                Received on {{ client.create_at | date:'m/d/Y' }} at {{ client.create_at | date:'H:i' }}
+            </div>
+            <div class="card-body">
+                <form action="/mark_message/" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <!-- Input ID Hidden -->
+                    <input type="hidden" value="{{ client.id}}" name="id">
+
+                    <div class="input-group mb-2">
+                        <span class="input-group-text justify-content-center side-label"><i class="fas fa-phone-alt"></i></span>
+                        <input type="text" id="input-bg" class="form-control" value="{{ client.phone }}" readonly>
+                    </div>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text justify-content-center side-label"><i class="fas fa-envelope"></i></span>
+                        <input id="input-bg" class="form-control" value="{{ client.email }}" readonly>
+                    </div>
+                    <div class="input-group mb-2">
+                        <span class="input-group-text justify-content-center side-label"><i class="fas fa-user-edit"></i></span>
+                        <input id="input-bg" class="form-control" value="{{ client.subject }}" readonly>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" name="" id="input-bg" rows="10" readonly>{{ client.message }}</textarea>
+                    </div>
+                    
+                    <div class="input-group mb-3 mt-3">
+                        {% if client.file == '' %}
+                            <input type="text" class="form-control" id="input-bg" value="No attachment" readonly>
+                        {% else %}
+                            <a href="/media/{{ client.file }}" id="paper-clip" class="bg-dark text-light input-group-text justify-content-center side-label" target="_blank" style="text-decoration: none;">
+                                <i class="fas fa-paperclip"></i>
+                            </a>
+                            <input type="text" class="form-control" id="input-bg" value="{{ client.file }}" readonly>
+                        {% endif %}
+                    
+                    </div>
+
+                    {% if client.status == 'Pending' %}
+                    <input type="hidden" class="form-control" name="status" value="Read">
+                    {% endif %}
+                    
+                    <!-- Include -->
+                    {% include "modals/mark.html" %}
+
+                </form>
+
+                {% if client.status == 'Pending' %}
+                <a id="btn-back" class="btn btn-dark" title="Back" data-bs-toggle="modal" data-bs-target="#markModal">
+                {% else %}
+                <a href="{% url 'inbox' %}" id="btn-back" class="btn btn-dark" title="Back">
+                {% endif %}
+                    <i class="fas fa-arrow-left"></i>
+                </a>
+                <a  id="reply" class="btn text-light" title="Reply email">
+                    <i class="fas fa-reply"></i>&nbsp;&nbsp; <span>Reply</span>
+                </a>
+            </div>
+        </div> 
+    </div>
+{% endblock content %}

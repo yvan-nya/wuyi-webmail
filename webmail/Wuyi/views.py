@@ -32,7 +32,6 @@ def send_message(request):
 #=============================== BACKEND =========================================#
 @login_required(login_url='login')
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
-
 def inbox(request):
     if 'q' in request.GET:
         q = request.GET['q']
@@ -62,9 +61,28 @@ def inbox(request):
 # Fonction to delete the messages
 @login_required(login_url='login')
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
-
 def delete_message(request, client_id):
     client = Client.objects.get(id = client_id)
     client.delete()
     messages.success(request, "Messages successfully deleted !")
     return HttpResponseRedirect('/inbox/')
+
+# Fonction to view the message individually
+@login_required(login_url='login')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def client(request, client_id):
+    client = Client.objects.get(id = client_id)
+    if client != None:
+        return render(request, "client.html",{"client":client})
+
+#Function to mark the message as read
+@login_required(login_url='login')
+@cache_control(no_cache=True, must_revalidate=True, no_store=True)
+def mark_message(request):
+    if request.method =="POST":
+        client = Client.objects.get(id =request.POST.get('id'))
+        if client != None:
+            client.status = request.POST.get('status')
+            client.save()
+            messages.success(request, "Messages marked as READ !")
+            return HttpResponseRedirect('/inbox/')

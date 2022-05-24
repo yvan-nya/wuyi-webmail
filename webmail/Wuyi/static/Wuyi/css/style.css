@@ -50,6 +50,33 @@ body{
     width: 45px;
 }
 
+/* BG inputs on client.html */
+#input-bg{
+    background-color: #fff;
+}
+#btn-back{
+    width: 4%;
+    float: left;
+    border-radius: 0px;
+}
+
+#reply{
+    width: 110px;
+    float: left;
+    margin-left: 5px;
+    background-color: #2e856e;
+    border-radius: 0px;
+}
+
+/* label of the inputs (individual messages*/
+.side-label{
+    width: 4%;
+    font-size: 15px;
+}
+#paper-clip{
+    text-decoration: none;
+}
+
 /* If no messages */
 #msg{
     position: absolute;

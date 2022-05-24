@@ -12,9 +12,13 @@ urlpatterns = [
     path('login/', include('django.contrib.auth.urls')),
     # Path to send a message
     path('send_message/', views.send_message, name = "send_message"),
-    # Path to inbox page (Backend)
     
+    # Path to inbox page (Backend)
     path('inbox/', views.inbox, name = "inbox"),
     # Path to login/logout
-    path('delete_message/<str:client_id>', views.delete_message, name="delete_message")
+    path('delete_message/<str:client_id>', views.delete_message, name="delete_message"),
+    # Path to view the message individually
+    path('client/<str:client_id>', views.client, name="client"),
+    # Path to mark the message as Read(Backend)
+    path('mark_message/', views.mark_message, name = "mark_message"),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
